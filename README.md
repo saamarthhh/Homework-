@@ -3,195 +3,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ระบบส่งการบ้าน - Classroom Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400;600&display=swap" rel="stylesheet">
 
     <style>
+        /* --- ตั้งค่าพื้นฐาน --- */
         :root {
-            --bg-color: #f0f7ff;      /* พื้นหลังน้ำเงินสว่างมาก */
-            --card-bg: #ffffff;      /* สีขาวสะอาด */
-            --accent-pink: #ffc1cc;  /* ชมพูพาสเทล */
-            --accent-blue: #a2c2e1;  /* น้ำเงินพาสเทล */
-            --text-main: #5a5a5a;
-            --nav-bg: rgba(255, 255, 255, 0.8);
+            --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --text-primary: #2c3e50;
+            --accent-pink: #ffafbd;
+            --accent-blue: #2193b0;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
         }
 
         body {
-            font-family: 'Kanit', sans-serif;
-            background-color: var(--bg-color);
+            /* พื้นหลังเป็นสี Gradient นุ่มๆ */
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             margin: 0;
-            color: var(--text-main);
-            /* พื้นหลังไล่เฉดเบาๆ ให้ดูมีมิติแบบในรูป */
-            background: linear-gradient(135deg, #fdfcfb 0%, #e2ebf0 100%);
+            color: var(--text-primary);
             min-height: 100vh;
         }
 
-        /* Navbar แบบใสๆ สบายตา */
+        /* --- Navbar ดีไซน์โปร่งแสง --- */
         .navbar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 8%;
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .logo {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #777;
-            letter-spacing: 1px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #2193b0, #6dd5ed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* ส่วนโปรไฟล์ */
-        .user-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .profile-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-pink);
-            cursor: pointer;
-            object-fit: cover;
-            transition: 0.3s;
-        }
-
-        .profile-btn:hover { transform: scale(1.1); }
-
-        /* ส่วนหัวข้อ */
-        .page-title {
+        /* --- ส่วนหัวข้อกลางหน้าเว็บ --- */
+        .hero {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 60px 20px;
         }
 
-        .page-title h1 {
-            font-size: 2.2rem;
-            font-weight: 400;
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
             margin: 0;
-            color: #444;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .page-title p { color: #888; margin-top: 10px; }
+        .hero p {
+            font-size: 1.1rem;
+            color: #f8f9fa;
+            font-weight: 200;
+        }
 
-        /* การจัดวางกล่อง (Grid Layout) ตามรูปตัวอย่าง */
+        /* --- การจัดวางกล่องห้องเรียน --- */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 60px;
+            padding: 0 20px 50px 20px;
         }
 
         .class-grid {
             display: grid;
-            /* เรียง 3 กล่องต่อแถวสวยๆ */
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .class-card {
-            background: var(--card-bg);
-            border-radius: 30px; /* ความโค้งมนสูงตามรูป */
-            padding: 40px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255,255,255,0.6);
         }
 
         .class-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            background: linear-gradient(to bottom right, #ffffff, var(--soft-blue));
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: white;
         }
 
         .class-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            color: #333;
-            font-weight: 500;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-blue);
         }
 
-        /* ปุ่มกดที่ดูนุ่มนวล */
-        .submit-btn {
-            background-color: var(--accent-pink);
-            color: #7a5a5a;
+        /* --- พื้นที่ QR Code --- */
+        .qr-box {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            background: #fdfbfb;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--accent-pink);
+            color: #ce93d8;
+        }
+
+        /* --- ปุ่มกดสไตล์นุ่มนวล --- */
+        .btn-submit {
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            color: white;
             border: none;
             padding: 12px 35px;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 400;
             cursor: pointer;
+            width: 100%;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 193, 204, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 175, 189, 0.4);
         }
 
-        .submit-btn:hover {
-            background-color: #ffadb9;
-            box-shadow: 0 6px 20px rgba(255, 193, 204, 0.6);
+        .btn-submit:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(255, 175, 189, 0.6);
         }
 
-        /* ส่วนของ Footer */
-        footer {
-            text-align: center;
-            padding-bottom: 40px;
-            color: #aaa;
-            font-size: 0.85rem;
+        /* โปรไฟล์นักเรียน */
+        .profile-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
         }
-
-        input[type="file"] { display: none; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">CLASSROOM HUB</div>
-        <div class="user-controls">
-            <button class="submit-btn" style="padding: 8px 20px; font-size: 0.9rem; background: var(--accent-blue); color: white; box-shadow: none;">Teacher Login</button>
-            <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="profile-btn" id="profile-display" onclick="document.getElementById('avatar-input').click()">
-            <input type="file" id="avatar-input" accept="image/*" onchange="updateProfile(event)">
+        <div class="logo">Classroom 2026</div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span style="font-weight: 200;">ครูมาร์ท</span>
+            <img src="https://via.placeholder.com/45" class="profile-img" alt="Profile">
         </div>
     </nav>
 
-    <div class="page-title">
-        <h1>ห้องเรียน ม.2</h1>
-        <p>เลือกห้องเรียนเพื่อเข้าสู่ระบบการส่งงาน</p>
+    <div class="hero">
+        <h1>พื้นที่ส่งงานออนไลน์</h1>
+        <p>ยกระดับการเรียนรู้ด้วยระบบจัดการที่ง่ายและสวยงาม</p>
     </div>
 
     <div class="container">
         <div class="class-grid">
             <script>
-                const rooms = ['2/1', '2/2', '2/3', '2/4', '2/5', '2/6', '2/7', '2/8', '2/9'];
-                rooms.forEach(room => {
+                for(let i=1; i<=9; i++) {
                     document.write(`
                         <div class="class-card">
-                            <h3>ห้อง ม.${room}</h3>
-                            <input type="file" id="file-${room}" accept=".pdf,.doc,.docx,.jpg,.png,.ppt,.pptx">
-                            <button class="submit-btn" onclick="document.getElementById('file-${room}').click()">ส่งงาน</button>
+                            <h3>ห้อง ม.2/${i}</h3>
+                            <div class="qr-box">
+                                <span style="font-size: 0.8rem;">[ Scan QR Code ]</span>
+                            </div>
+                            <button class="btn-submit" onclick="alert('ระบบกำลังเปิดรับไฟล์ห้อง 2/${i}')">ส่งงานที่นี่</button>
+                            <p style="font-size: 0.8rem; color: #999; margin-top: 15px;">ส่งได้ทั้ง PDF, Word และรูปภาพ</p>
                         </div>
                     `);
-                });
+                }
             </script>
         </div>
     </div>
 
-    <footer>
-        Designed by Mart & Jaymi © 2026
+    <footer style="text-align: center; padding: 30px; color: white; font-weight: 200;">
+        © 2026 Designed for Education by Mart & Jaymi
     </footer>
 
-    <script>
-        // ฟังก์ชันเปลี่ยนรูปโปรไฟล์
-        function updateProfile(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById('profile-display').src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
 </body>
 </html>
